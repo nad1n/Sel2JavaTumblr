@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -36,6 +37,10 @@ public class TestDeletePost {
         //delete Post
         driver.findElement(By.cssSelector(".kIuBF:nth-child(6) svg")).click();
         driver.findElement(By.cssSelector("li:nth-child(1) > a > span:nth-child(1)")).click();
+
+        String postName = driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[2]/div[2]/div[1]/div/div/article/div[2]/div[1]/h1")).getText();
+        Assert.assertEquals("Test post", postName);
+
         driver.findElement(By.cssSelector(".IGdYk:nth-child(1) .\\_PKfi:nth-child(5) svg:nth-child(1)")).click();
         {
             WebElement element = driver.findElement(By.cssSelector(".IGdYk:nth-child(1) .\\_PKfi:nth-child(5) svg:nth-child(1)"));

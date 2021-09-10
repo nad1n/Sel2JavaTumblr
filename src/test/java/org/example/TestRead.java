@@ -13,8 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestCreatePost {
-
+public class TestRead {
     private static final String PAGE_URL = "https://www.tumblr.com/login";
     public static LoginPage loginPage;
 
@@ -32,14 +31,21 @@ public class TestCreatePost {
     }
 
     @Test
-    public void createPostTest() {
+    public void readUserTest() {
         loginPage.login("petrenko.nad1n@gmail.com", "K31a33ru");
-        String loginName = driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[4]/div[2]/div[1]/div/div/article/header/div/div[1]/div[1]/div/div/span/span/a")).getText();
-        Assert.assertEquals("lazytalecupcake", loginName);
 
-        //create Post
+        //read User
         {
-            WebElement element = driver.findElement(By.cssSelector(".kIuBF:nth-child(6) svg"));
+            WebElement element = driver.findElement(By.cssSelector(".bUZAr:nth-child(1) .M4qlf .vq1BT"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        driver.findElement(By.cssSelector(".bUZAr:nth-child(1) .M4qlf .vq1BT")).click();
+        driver.findElement(By.cssSelector(".kIuBF:nth-child(6) path")).click();
+        driver.findElement(By.cssSelector(".\\_8eYy:nth-child(2) .ud3ie")).click();
+        driver.findElement(By.cssSelector(".M4qlf:nth-child(1) > .f8EId .lmRkK")).click();
+        {
+            WebElement element = driver.findElement(By.cssSelector(".S07PS"));
             Actions builder = new Actions(driver);
             builder.moveToElement(element).perform();
         }
@@ -48,21 +54,12 @@ public class TestCreatePost {
             Actions builder = new Actions(driver);
             builder.moveToElement(element, 0, 0).perform();
         }
-        driver.findElement(By.cssSelector(".BPAd0 > svg")).click();
-        driver.findElement(By.cssSelector(".ZkWu_")).click();
-
-        driver.findElement(By.cssSelector(".public-DraftStyleDefault-block")).sendKeys("Test post");
-        driver.findElement(By.cssSelector(".shgTR"));
-        driver.findElement(By.xpath("//*[@id=\"row-1\"]/div/div/div/div[1]/div[1]/div/div/div/div/div/span/p/div/span")).sendKeys("Yjdfgfgfgkjf");
-
-        driver.findElement(By.cssSelector(".XEpuX")).click();
+        driver.findElement(By.cssSelector(".\\_Km36 > .xBRdB path")).click();
     }
-
-
 
     @AfterClass
     public static void tearDown() {
 
-        driver.quit();
+        //driver.quit();
     }
 }
