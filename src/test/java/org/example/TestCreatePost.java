@@ -32,11 +32,14 @@ public class TestCreatePost {
     }
 
     @Test
-    public void createPostTest() {
+    public void loginTest(){
         loginPage.login("petrenko.nad1n@gmail.com", "K31a33ru");
         String loginName = driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[4]/div[2]/div[1]/div/div/article/header/div/div[1]/div[1]/div/div/span/span/a")).getText();
         Assert.assertEquals("lazytalecupcake", loginName);
+    }
 
+    @Test
+    public void createPostTest() {
         //create Post
         {
             WebElement element = driver.findElement(By.cssSelector(".kIuBF:nth-child(6) svg"));
@@ -58,7 +61,77 @@ public class TestCreatePost {
         driver.findElement(By.cssSelector(".XEpuX")).click();
     }
 
+    @Test
+    public void likePostTest() {
+        driver.findElement(By.cssSelector(".kIuBF:nth-child(1) svg")).click();
+        //like post
+        String postName = driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[4]/div[2]/div[1]/div/div/article/div[2]/div[1]/h1")).getText();
+        Assert.assertEquals("Test post", postName);
 
+        driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[4]/div[2]/div[1]/div/div/article/div[3]/footer/div[2]/div[4]/button")).click();
+    }
+
+    @Test
+    public void readUserTest() {
+        {
+            WebElement element = driver.findElement(By.cssSelector(".bUZAr:nth-child(1) .M4qlf .vq1BT"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        driver.findElement(By.cssSelector(".bUZAr:nth-child(1) .M4qlf .vq1BT")).click();
+        driver.findElement(By.cssSelector(".kIuBF:nth-child(6) path")).click();
+        driver.findElement(By.cssSelector(".\\_8eYy:nth-child(2) .ud3ie")).click();
+        driver.findElement(By.cssSelector(".M4qlf:nth-child(1) > .f8EId .lmRkK")).click();
+        {
+            WebElement element = driver.findElement(By.cssSelector(".S07PS"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        driver.findElement(By.cssSelector(".\\_Km36 > .xBRdB path")).click();
+    }
+
+    //здесь не работает, а в отдельном классе работает!!!
+    @Test
+    public void deletePostTest() {
+        //delete Post
+        driver.findElement(By.cssSelector(".kIuBF:nth-child(6) svg")).click();
+        driver.findElement(By.cssSelector("li:nth-child(1) > a > span:nth-child(1)")).click();
+
+        String postName = driver.findElement(By.xpath("//*[@id=\"base-container\"]/div[2]/div[2]/div[1]/main/div[2]/div[2]/div[1]/div/div/article/div[2]/div[1]/h1")).getText();
+        Assert.assertEquals("Test post", postName);
+
+        driver.findElement(By.cssSelector(".IGdYk:nth-child(1) .\\_PKfi:nth-child(5) svg:nth-child(1)")).click();
+        {
+            WebElement element = driver.findElement(By.cssSelector(".IGdYk:nth-child(1) .\\_PKfi:nth-child(5) svg:nth-child(1)"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        driver.findElement(By.cssSelector(".ZYq7T:nth-child(2) > .vq1BT")).click();
+        driver.findElement(By.cssSelector(".TeEAG path")).click();
+        {
+            WebElement element = driver.findElement(By.cssSelector(".TeEAG path"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        driver.findElement(By.cssSelector(".oXYe5:nth-child(1)")).click();
+        driver.findElement(By.cssSelector(".ZYq7T:nth-child(2) > .vq1BT")).click();
+
+    }
 
     @AfterClass
     public static void tearDown() {

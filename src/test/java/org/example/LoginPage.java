@@ -30,5 +30,4 @@ public class LoginPage {
         passwordField.sendKeys(password);
         loginBtn.click();
     }
-
 }
